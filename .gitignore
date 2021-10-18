@@ -58,3 +58,8 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# Files automatically made by Apple
+.DS_Store
+
+# JetBrains Editor cache directory
+.idea/
