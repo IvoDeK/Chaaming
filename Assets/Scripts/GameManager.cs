@@ -2,10 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     //In code
+    public int startGamesCount = 1, gamesCount = 10;
+    private float totalSceneProgress;
+    public GameObject loadingScreen;
+    public Image loadingImage;
+    private List<AsyncOperation> scenesLoading = new List<AsyncOperation>();
+
     private float startTime;
     private float targetTime;
     private bool isTiming;
@@ -18,8 +25,9 @@ public class GameManager : MonoBehaviour
     //Read only
     private float progressValue, score, health;
 
-    //Player options (read only)
+    //Player options (read only) (not needed)
     private bool playSound, playMusic;
+    private float volumeSound, volumeMusic;
 
     #region singleton
     public static GameManager instance { get; private set; }
@@ -94,21 +102,58 @@ public class GameManager : MonoBehaviour
         ResetValues();
         NextGame();
     }
+    #endregion
+
+    #region SceneSwitching
+    //Possible different colours on scene switching
+    //Animation on start loading and end loading (before countdown + string given by player)
 
     private void NextGame()
     {
-        //Do stuff (Scene switch to random scene out of list)
+        LoadScene(Random.Range(startGamesCount, gamesCount + 1 + startGamesCount));
     }
 
     private void GameOver()
     {
-        //Do stuff (go back to main scene)
+        LoadScene(0);
+    }
+
+    private void LoadScene(int scene)
+    {
+        loadingScreen.gameObject.SetActive(true);
+        scenesLoading.Add(SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex));
+        scenesLoading.Add(SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive));
+        StartCoroutine(GetSceneLoadProgress());
+    }
+
+    public IEnumerator GetSceneLoadProgress()
+    {
+        for (int i = 0; i < scenesLoading.Count; i++)
+        {
+            while (!scenesLoading[i].isDone)
+            {
+                totalSceneProgress = 0;
+
+                foreach (AsyncOperation operation in scenesLoading)
+                {
+                    totalSceneProgress += operation.progress;
+                }
+                totalSceneProgress = (totalSceneProgress / scenesLoading.Count) * 100f;
+                loadingImage.fillAmount = totalSceneProgress;
+                yield return null;
+            }
+        }
+
+        loadingScreen.gameObject.SetActive(false);
     }
     #endregion
 
-    void Update()
+
+
+    public void Update()
     {
         GameHandler();
+        Debug.Log(Random.Range(1, gamesCount));
     }
 
     private void ResetValues()
@@ -121,6 +166,7 @@ public class GameManager : MonoBehaviour
         progressValue = 0;
     }
 
+    public int GetHealth() { return (int)health; }
     public float GetProgressValue() { return progressValue; }
     public float GetTime() { return Time.time - startTime; }
     public int GetScore() { return (int)score; }
