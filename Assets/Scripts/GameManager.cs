@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Timing + Gameplay
-    public void StartGame(float time, bool startAsWin)
+    public void StartGame(float time, bool startAsWin, string gameplayText)
     {
         startTime = Time.time;
         targetTime = time;
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
     {
         health--;
         if (health <= 0) GameOver();
-        else { NextGame(); ResetValues(); }
+        else { ResetValues(); NextGame(); }
     }
 
     private void GameWon()
@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(GetSceneLoadProgress());
     }
 
-    public IEnumerator GetSceneLoadProgress()
+    private IEnumerator GetSceneLoadProgress()
     {
         for (int i = 0; i < scenesLoading.Count; i++)
         {
@@ -150,16 +150,16 @@ public class GameManager : MonoBehaviour
 
 
 
-    public void Update()
+    private void Update()
     {
         GameHandler();
-        Debug.Log(Random.Range(1, gamesCount));
     }
 
     private void ResetValues()
     {
         isTiming = false;
         hasWon = false;
+        startedAsWin = false;
         startTime = 0;
 
         //Not really needed
@@ -170,5 +170,5 @@ public class GameManager : MonoBehaviour
     public float GetProgressValue() { return progressValue; }
     public float GetTime() { return Time.time - startTime; }
     public int GetScore() { return (int)score; }
-    public void HasWon() { hasWon = true; }
+    public void SetWon(bool won) { hasWon = won; }
 }
