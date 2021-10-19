@@ -76,6 +76,11 @@ public class UIScript : MonoBehaviour
         mainStartButton.Select();
     }
 
+    public void ResetButton()
+    {
+        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
+    }
+
     public void DeathScreen()
     {
         inGame.GetComponentInChildren<Canvas>().enabled = false;

@@ -280,7 +280,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 116223486}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 730215676}
+        m_TargetAssemblyTypeName: UIScript, Assembly-CSharp
+        m_MethodName: ResetButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &116223486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -402,13 +414,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 730215672}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 730215676}
+        m_TargetAssemblyTypeName: UIScript, Assembly-CSharp
+        m_MethodName: ResetButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -534,7 +546,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 477254279}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 730215676}
+        m_TargetAssemblyTypeName: UIScript, Assembly-CSharp
+        m_MethodName: ResetButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &477254279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1269,7 +1293,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c624b8109604f588b7589429f24a36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startGamesCount: 1
   gamesCount: 2
   loadingScreen: {fileID: 1699299229}
   loadingImage: {fileID: 1265724810}
@@ -1332,6 +1355,7 @@ MonoBehaviour:
   mainHighScoreButton: {fileID: 1227483438}
   deathRestartButton: {fileID: 116223485}
   deathMainButton: {fileID: 1322686260}
+  progressbar: {fileID: 0}
 --- !u!1 &789368170
 GameObject:
   m_ObjectHideFlags: 0
@@ -2362,7 +2386,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1227483439}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 730215676}
+        m_TargetAssemblyTypeName: UIScript, Assembly-CSharp
+        m_MethodName: ResetButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1227483439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2692,7 +2728,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1322686261}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 730215676}
+        m_TargetAssemblyTypeName: UIScript, Assembly-CSharp
+        m_MethodName: ResetButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1322686261
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -151,10 +151,6 @@ public class GameManager : MonoBehaviour
         int toUnload = SceneManager.GetActiveScene().buildIndex;
         loadingScreen.GetComponentInChildren<Canvas>().enabled = true;
         scenesLoading.Add(SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive));
-        
-
-        
-
 
         for (int i = 0; i < scenesLoading.Count; i++)
         {
