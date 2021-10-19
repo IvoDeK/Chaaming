@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
     {
         _health.RemoveOneHealth();
         health = _health.health;
-        if (health <= 0) { GameOver(); RestartValues(); }
+        if (health <= 0) { GameOver(); ResetValues(); RestartValues(); }
         else { ResetValues(); NextGame(); }
     }
 
