@@ -10,10 +10,11 @@ public class UIScript : MonoBehaviour
     [SerializeField] private GameObject inGame;
     [SerializeField] private GameObject loading;
     [SerializeField] private GameObject deathScreen;
+    [SerializeField] private GameObject credits;
 
     [SerializeField] private Button mainStartButton;
     [SerializeField] private Button mainTutorialButton;
-    [SerializeField] private Button mainHighScoreButton;
+    [SerializeField] private Button mainCreditsButton;
     
     [SerializeField] private Button deathRestartButton;
     [SerializeField] private Button deathMainButton;
@@ -33,7 +34,7 @@ public class UIScript : MonoBehaviour
         
         mainStartButton.onClick.AddListener(delegate { RestartGame(); });
         mainTutorialButton.onClick.AddListener(delegate { Tutorial(); });
-        mainHighScoreButton.onClick.AddListener(delegate { HighScores(); });
+        mainCreditsButton.onClick.AddListener(delegate { Credits(); });
         
         deathRestartButton.onClick.AddListener(delegate { RestartGame(); });
         deathMainButton.onClick.AddListener(delegate { MainMenu(); });
@@ -55,12 +56,6 @@ public class UIScript : MonoBehaviour
         RestartGame();
     }
 
-    private void HighScores()
-    {
-        mainMenu.GetComponentInChildren<Canvas>().enabled = false;
-        RestartGame();
-    }
-
     private void RestartGame()
     {
         mainMenu.GetComponentInChildren<Canvas>().enabled = false;
@@ -72,8 +67,18 @@ public class UIScript : MonoBehaviour
     private void MainMenu()
     {
         deathScreen.GetComponentInChildren<Canvas>().enabled = false;
+        credits.GetComponentInChildren<Canvas>().enabled = false;
         mainMenu.GetComponentInChildren<Canvas>().enabled = true;
         mainStartButton.Select();
+    }
+
+    private void Credits()
+    {
+        mainMenu.GetComponentInChildren<Canvas>().enabled = false;
+        credits.GetComponentInChildren<Canvas>().enabled = true;
+        
+        Animator anim = gameObject.GetComponent<Animator>();
+        anim.Play("PlayCredits");
     }
 
     public void ResetButton()
