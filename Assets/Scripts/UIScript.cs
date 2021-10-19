@@ -42,15 +42,13 @@ public class UIScript : MonoBehaviour
     private void Tutorial()
     {
         mainMenu.GetComponentInChildren<Canvas>().enabled = false;
-        //Temp
-        inGame.GetComponentInChildren<Canvas>().enabled = true;
+        RestartGame();
     }
 
     private void HighScores()
     {
         mainMenu.GetComponentInChildren<Canvas>().enabled = false;
-        //Temp
-        inGame.GetComponentInChildren<Canvas>().enabled = true;
+        RestartGame();
     }
 
     private void RestartGame()
