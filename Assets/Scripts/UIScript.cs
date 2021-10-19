@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +21,9 @@ public class UIScript : MonoBehaviour
     [SerializeField] private Button deathMainButton;
 
     [SerializeField] private Scrollbar progressbar;
+
+    [SerializeField] private TextMeshProUGUI InGameScore;
+    [SerializeField] private TextMeshProUGUI deathScreenScore;
 
     private GameManager gm;
 
@@ -43,6 +47,7 @@ public class UIScript : MonoBehaviour
     private void Update()
     {
         SetProgressbar();
+        InGameScore.text = "Score: " + gm.GetScore();
     }
 
     private void SetProgressbar()
@@ -91,5 +96,6 @@ public class UIScript : MonoBehaviour
         inGame.GetComponentInChildren<Canvas>().enabled = false;
         deathScreen.GetComponentInChildren<Canvas>().enabled = true;
         deathRestartButton.Select();
+        deathScreenScore.text = "Score: " + gm.GetScore();
     }
 }
