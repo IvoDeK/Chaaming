@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     //In code
-    public int startGamesCount = 1, gamesCount = 10;
+    public int gamesCount = 2;
+    private int startGamesCount = 1;
     private float totalSceneProgress;
     public GameObject loadingScreen;
     public Image loadingImage;
