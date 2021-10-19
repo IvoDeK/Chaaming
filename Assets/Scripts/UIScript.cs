@@ -11,13 +11,14 @@ public class UIScript : MonoBehaviour
     [SerializeField] private GameObject loading;
     [SerializeField] private GameObject deathScreen;
 
-
     [SerializeField] private Button mainStartButton;
     [SerializeField] private Button mainTutorialButton;
     [SerializeField] private Button mainHighScoreButton;
     
     [SerializeField] private Button deathRestartButton;
     [SerializeField] private Button deathMainButton;
+
+    [SerializeField] private Scrollbar progressbar;
 
     private GameManager gm;
 
@@ -37,7 +38,16 @@ public class UIScript : MonoBehaviour
         deathRestartButton.onClick.AddListener(delegate { RestartGame(); });
         deathMainButton.onClick.AddListener(delegate { MainMenu(); });
     }
-   
+
+    private void Update()
+    {
+        SetProgressbar();
+    }
+
+    private void SetProgressbar()
+    {
+        progressbar.size = gm.GetProgressValue();
+    } 
 
     private void Tutorial()
     {
