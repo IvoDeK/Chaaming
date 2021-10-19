@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
     {
         if (isTiming)
         { //Second bit check out (targetTime - Time.time + startTime)
-            float timeRemap = (Time.time - startTime) / (targetTime - startTime);
+            float timeRemap = (Time.time - startTime) / targetTime;
             progressValue = Mathf.Clamp(timeRemap, 0, 1);
         }
     }
@@ -107,12 +107,12 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    
+
     private void GameLost()
     {
         _health.RemoveOneHealth();
         health = _health.health;
-        if (health <= 0) GameOver();
+        if (health <= 0) { GameOver(); RestartValues(); }
         else { ResetValues(); NextGame(); }
     }
 

@@ -22,6 +22,7 @@ public class Health : MonoBehaviour
     {
         if (_health <= 0) return false;
         hearts[_health-1].sprite = emptyHeart;
+        _health--;
         return true;
     }
 
