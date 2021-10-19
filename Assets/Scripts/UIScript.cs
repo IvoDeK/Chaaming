@@ -30,19 +30,14 @@ public class UIScript : MonoBehaviour
         loading.GetComponentInChildren<Canvas>().enabled = false;
         deathScreen.GetComponentInChildren<Canvas>().enabled = false;
         
-        mainStartButton.onClick.AddListener(delegate { GameStartButton(); });
+        mainStartButton.onClick.AddListener(delegate { RestartGame(); });
         mainTutorialButton.onClick.AddListener(delegate { Tutorial(); });
         mainHighScoreButton.onClick.AddListener(delegate { HighScores(); });
         
         deathRestartButton.onClick.AddListener(delegate { RestartGame(); });
         deathMainButton.onClick.AddListener(delegate { MainMenu(); });
     }
-    
-    private void GameStartButton()
-    {
-        mainMenu.GetComponentInChildren<Canvas>().enabled = false;
-        inGame.GetComponentInChildren<Canvas>().enabled = true;
-    }
+   
 
     private void Tutorial()
     {
@@ -60,9 +55,10 @@ public class UIScript : MonoBehaviour
 
     private void RestartGame()
     {
+        mainMenu.GetComponentInChildren<Canvas>().enabled = false;
         deathScreen.GetComponentInChildren<Canvas>().enabled = false;
         inGame.GetComponentInChildren<Canvas>().enabled = true;
-        //Start the game
+        gm.RestartGame();
     }
 
     private void MainMenu()

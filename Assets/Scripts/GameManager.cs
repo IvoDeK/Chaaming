@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public Image loadingImage;
     private List<AsyncOperation> scenesLoading = new List<AsyncOperation>();
 
+    private UIScript uiScript;
     private float startTime;
     private float targetTime;
     private bool isTiming;
@@ -40,6 +41,8 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else Destroy(gameObject);
+
+        uiScript = gameObject.GetComponent<UIScript>();
     }
     #endregion
 
@@ -51,6 +54,12 @@ public class GameManager : MonoBehaviour
         isTiming = true;
         hasWon = startAsWin;
         startedAsWin = startAsWin;
+    }
+
+    public void RestartGame()
+    {
+        NextGame();
+        ResetValues();
     }
 
     private void Timer()
@@ -116,6 +125,7 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
+        uiScript.DeathScreen();
         LoadScene(0);
     }
 
@@ -154,6 +164,12 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         GameHandler();
+    }
+
+    private void RestartValues()
+    {
+        score = 0;
+        health = 3;
     }
 
     private void ResetValues()
