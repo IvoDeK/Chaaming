@@ -2,7 +2,7 @@
 DDW GameJam SL
 
 # Info
-Add your scene to the buildIndex (build options, add open scene) Make this always be placed BELOW/AFTER the main scene.
+Place the GameManager.cs on an empty object on your scene
 
 `Start game(float Time, bool StartAsWin (win condition), string gameplayText)`
 
@@ -15,15 +15,3 @@ Add your scene to the buildIndex (build options, add open scene) Make this alway
 `SetWon(bool won)`
 
 **Won** = set the bool hasWon to true or false. Keep your win condition in mind!
-
-<-This you likely won't need but just in case of needing it.->
-
-`GetTime`
-
-Returns the time(float) in case you want to make events time based on the used timer.
-
-`GetProgressValue`
-
-Returns the progressValue(float) in case you want to see how far you are along the current timing. Returns a value ranging from 0.0f-1.0f.
-
-Public value `gamesCount` on the gamemanager (UI in Hierarchy). Set this to the amount of games, It will use this value to randomly select the needed index.
