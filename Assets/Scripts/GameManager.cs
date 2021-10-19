@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     private float totalSceneProgress;
     public GameObject loadingScreen;
     public Image loadingImage;
-    private List<AsyncOperation> scenesLoading = new List<AsyncOperation>();
+    private List<AsyncOperation> scenesLoading;
 
     private UIScript uiScript;
     private float startTime;
@@ -46,8 +46,14 @@ public class GameManager : MonoBehaviour
 
         uiScript = gameObject.GetComponent<UIScript>();
         _health = gameObject.GetComponent<Health>();
+        RestartValues();
     }
     #endregion
+
+    private void Start()
+    {
+        scenesLoading = new List<AsyncOperation>();
+    }
 
     #region Timing + Gameplay
     public void StartGame(float time, bool startAsWin, string gameplayText)
@@ -124,7 +130,7 @@ public class GameManager : MonoBehaviour
 
     private void NextGame()
     {
-        LoadScene(Random.Range(startGamesCount, gamesCount + 1 + startGamesCount));
+        LoadScene(Random.Range(startGamesCount, gamesCount + startGamesCount));
     }
 
     private void GameOver()
@@ -135,14 +141,21 @@ public class GameManager : MonoBehaviour
 
     private void LoadScene(int scene)
     {
-        loadingScreen.gameObject.SetActive(true);
-        scenesLoading.Add(SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex));
-        scenesLoading.Add(SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive));
-        StartCoroutine(GetSceneLoadProgress());
+        StartCoroutine(GetSceneLoadProgress(scene));
     }
 
-    private IEnumerator GetSceneLoadProgress()
+    private IEnumerator GetSceneLoadProgress(int scene)
     {
+        Debug.Log(scene);
+
+        int toUnload = SceneManager.GetActiveScene().buildIndex;
+        loadingScreen.GetComponentInChildren<Canvas>().enabled = true;
+        scenesLoading.Add(SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive));
+        
+
+        
+
+
         for (int i = 0; i < scenesLoading.Count; i++)
         {
             while (!scenesLoading[i].isDone)
@@ -159,7 +172,13 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        loadingScreen.gameObject.SetActive(false);
+        while (scenesLoading[scenesLoading.Count - 1].isDone)
+        {
+            SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(scene));
+            scenesLoading.Add(SceneManager.UnloadSceneAsync(toUnload));
+        }
+        loadingScreen.GetComponentInChildren<Canvas>().enabled = false;
+        
     }
     #endregion
 
