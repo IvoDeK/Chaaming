@@ -1,0 +1,81 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class UIScript : MonoBehaviour
+{
+    [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject inGame;
+    [SerializeField] private GameObject loading;
+    [SerializeField] private GameObject deathScreen;
+
+
+    [SerializeField] private Button mainStartButton;
+    [SerializeField] private Button mainTutorialButton;
+    [SerializeField] private Button mainHighScoreButton;
+    
+    [SerializeField] private Button deathRestartButton;
+    [SerializeField] private Button deathMainButton;
+
+    private GameManager gm;
+
+    private void Start()
+    {
+        gm = GameManager.instance;
+        MainMenu();
+        
+        inGame.GetComponentInChildren<Canvas>().enabled = false;
+        loading.GetComponentInChildren<Canvas>().enabled = false;
+        deathScreen.GetComponentInChildren<Canvas>().enabled = false;
+        
+        mainStartButton.onClick.AddListener(delegate { GameStartButton(); });
+        mainTutorialButton.onClick.AddListener(delegate { Tutorial(); });
+        mainHighScoreButton.onClick.AddListener(delegate { HighScores(); });
+        
+        deathRestartButton.onClick.AddListener(delegate { RestartGame(); });
+        deathMainButton.onClick.AddListener(delegate { MainMenu(); });
+    }
+    
+    private void GameStartButton()
+    {
+        mainMenu.GetComponentInChildren<Canvas>().enabled = false;
+        inGame.GetComponentInChildren<Canvas>().enabled = true;
+    }
+
+    private void Tutorial()
+    {
+        mainMenu.GetComponentInChildren<Canvas>().enabled = false;
+        //Temp
+        inGame.GetComponentInChildren<Canvas>().enabled = true;
+    }
+
+    private void HighScores()
+    {
+        mainMenu.GetComponentInChildren<Canvas>().enabled = false;
+        //Temp
+        inGame.GetComponentInChildren<Canvas>().enabled = true;
+    }
+
+    private void RestartGame()
+    {
+        deathScreen.GetComponentInChildren<Canvas>().enabled = false;
+        inGame.GetComponentInChildren<Canvas>().enabled = true;
+        //Start the game
+    }
+
+    private void MainMenu()
+    {
+        deathScreen.GetComponentInChildren<Canvas>().enabled = false;
+        mainMenu.GetComponentInChildren<Canvas>().enabled = true;
+        mainStartButton.Select();
+    }
+
+    public void DeathScreen()
+    {
+        inGame.GetComponentInChildren<Canvas>().enabled = false;
+        deathScreen.GetComponentInChildren<Canvas>().enabled = true;
+        deathRestartButton.Select();
+    }
+}

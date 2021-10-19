@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Health : MonoBehaviour
 {
     [SerializeField]
-    private int health;
+    private int _health;
 
     [SerializeField] 
     private Image[] hearts;
@@ -20,15 +20,26 @@ public class Health : MonoBehaviour
 
     public bool RemoveOneHealth()
     {
-        if (health <= 0) return false;
-        hearts[health-1].sprite = emptyHeart;
+        if (_health <= 0) return false;
+        hearts[_health-1].sprite = emptyHeart;
         return true;
     }
 
     public bool ResetHealth()
     {
         if (health > 0) return false;
+        _health = hearts.Length;
         hearts.All(heart => heart.sprite = fullHeart);
         return true;
     }
+
+    public int health
+    {
+        get
+        {
+            return _health;
+        }
+    }
+    
+    
 }
