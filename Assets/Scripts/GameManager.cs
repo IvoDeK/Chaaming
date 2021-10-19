@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
     //Read only
     private float progressValue, score, health;
 
+    private Health _health;
+
     //Player options (read only) (not needed)
     private bool playSound, playMusic;
     private float volumeSound, volumeMusic;
@@ -43,6 +45,7 @@ public class GameManager : MonoBehaviour
         else Destroy(gameObject);
 
         uiScript = gameObject.GetComponent<UIScript>();
+        _health = gameObject.GetComponent<Health>();
     }
     #endregion
 
@@ -101,7 +104,8 @@ public class GameManager : MonoBehaviour
     
     private void GameLost()
     {
-        health--;
+        _health.RemoveOneHealth();
+        health = _health.health;
         if (health <= 0) GameOver();
         else { ResetValues(); NextGame(); }
     }
@@ -169,7 +173,8 @@ public class GameManager : MonoBehaviour
     private void RestartValues()
     {
         score = 0;
-        health = 3;
+        _health.ResetHealth();
+        health = _health.health;
     }
 
     private void ResetValues()
