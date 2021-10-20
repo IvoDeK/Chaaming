@@ -27,8 +27,11 @@ public class UIScript : MonoBehaviour
 
     private GameManager gm;
 
+    private Animator anim;
+
     private void Start()
     {
+        anim = gameObject.GetComponent<Animator>();
         gm = GameManager.instance;
         MainMenu();
         
@@ -101,6 +104,7 @@ public class UIScript : MonoBehaviour
 
     private void MainMenu()
     {
+        anim.SetFloat("PlayAnim", 0);
         deathScreen.GetComponentInChildren<Canvas>().enabled = false;
         credits.GetComponentInChildren<Canvas>().enabled = false;
         mainMenu.GetComponentInChildren<Canvas>().enabled = true;
@@ -111,9 +115,9 @@ public class UIScript : MonoBehaviour
     {
         mainMenu.GetComponentInChildren<Canvas>().enabled = false;
         credits.GetComponentInChildren<Canvas>().enabled = true;
-        
-        Animator anim = gameObject.GetComponent<Animator>();
-        anim.Play("PlayCredits");
+
+        anim.SetFloat("PlayAnim", 1);
+        anim.Play("Credits");
     }
 
     public void ResetButton()
