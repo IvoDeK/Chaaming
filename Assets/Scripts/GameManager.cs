@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public Image loadingImage;
     private List<AsyncOperation> scenesLoading;
 
+    private bool canDo = true;
     private UIScript uiScript;
     private float startTime;
     private float targetTime;
@@ -110,17 +111,25 @@ public class GameManager : MonoBehaviour
 
     private void GameLost()
     {
-        _health.RemoveOneHealth();
-        health = _health.health;
-        if (health <= 0) { GameOver(); ResetValues(); RestartValues(); }
-        else { ResetValues(); NextGame(); }
+        if (canDo == true)
+        {
+            canDo = false;
+            _health.RemoveOneHealth();
+            health = _health.health;
+            if (health <= 0) { GameOver(); ResetValues(); RestartValues(); }
+            else { ResetValues(); NextGame(); }
+        }
     }
 
     private void GameWon()
     {
-        score++;
-        ResetValues();
-        NextGame();
+        if (canDo == true)
+        {
+            canDo = false;
+            score++;
+            ResetValues();
+            NextGame();
+        }
     }
     #endregion
 
@@ -135,8 +144,12 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
-        uiScript.DeathScreen();
-        LoadScene(0);
+        if (canDo == true)
+        {
+            canDo = false;
+            uiScript.DeathScreen();
+            LoadScene(0);
+        }
     }
 
     private void LoadScene(int scene)
@@ -175,6 +188,8 @@ public class GameManager : MonoBehaviour
         }
         loadingScreen.GetComponentInChildren<Canvas>().enabled = false;
         
+
+        canDo = true;
     }
     #endregion
 
