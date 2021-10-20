@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioSource gameOverSound;
     [SerializeField] private AudioSource winSound;
 
-    private bool canDo = true;
+    private bool canLoad = true;
     private UIScript uiScript;
     private float startTime;
     private float targetTime;
@@ -115,23 +115,22 @@ public class GameManager : MonoBehaviour
 
     private void GameLost()
     {
-        if (canDo == true)
+        if (canLoad == true)
         {
             loseSound.Play();
-            canDo = false;
             _health.RemoveOneHealth();
             health = _health.health;
-            if (health <= 0) { GameOver(); ResetValues(); RestartValues(); }
+            if (health <= 0) { GameOver(); }
             else { ResetValues(); NextGame(); }
         }
     }
 
     private void GameWon()
     {
-        if (canDo == true)
+        if (canLoad == true)
         {
+            canLoad = false;
             winSound.Play();
-            canDo = false;
             score++;
             ResetValues();
             NextGame();
@@ -145,18 +144,18 @@ public class GameManager : MonoBehaviour
 
     private void NextGame()
     {
-        LoadScene(Random.Range(startGamesCount, gamesCount + startGamesCount));
+         LoadScene(Random.Range(startGamesCount, gamesCount + startGamesCount));
     }
 
     private void GameOver()
     {
-        if (canDo == true)
-        {
-            gameOverSound.Play();
-            canDo = false;
-            uiScript.DeathScreen();
-            LoadScene(0);
-        }
+        Debug.Log("GameOverP2");
+        canLoad = false;
+        LoadScene(0);
+        uiScript.DeathScreen();
+        gameOverSound.Play();
+        ResetValues();
+        RestartValues();
     }
 
     private void LoadScene(int scene)
@@ -166,8 +165,6 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator GetSceneLoadProgress(int scene)
     {
-        Debug.Log(scene);
-
         int toUnload = SceneManager.GetActiveScene().buildIndex;
         loadingScreen.GetComponentInChildren<Canvas>().enabled = true;
         scenesLoading.Add(SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive));
@@ -196,7 +193,7 @@ public class GameManager : MonoBehaviour
         loadingScreen.GetComponentInChildren<Canvas>().enabled = false;
         
 
-        canDo = true;
+        canLoad = true;
     }
     #endregion
 
