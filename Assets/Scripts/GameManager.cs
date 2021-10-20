@@ -14,6 +14,10 @@ public class GameManager : MonoBehaviour
     public Image loadingImage;
     private List<AsyncOperation> scenesLoading;
 
+    [SerializeField] private AudioSource loseSound;
+    [SerializeField] private AudioSource gameOverSound;
+    [SerializeField] private AudioSource winSound;
+
     private bool canDo = true;
     private UIScript uiScript;
     private float startTime;
@@ -113,6 +117,7 @@ public class GameManager : MonoBehaviour
     {
         if (canDo == true)
         {
+            loseSound.Play();
             canDo = false;
             _health.RemoveOneHealth();
             health = _health.health;
@@ -125,6 +130,7 @@ public class GameManager : MonoBehaviour
     {
         if (canDo == true)
         {
+            winSound.Play();
             canDo = false;
             score++;
             ResetValues();
@@ -146,6 +152,7 @@ public class GameManager : MonoBehaviour
     {
         if (canDo == true)
         {
+            gameOverSound.Play();
             canDo = false;
             uiScript.DeathScreen();
             LoadScene(0);
