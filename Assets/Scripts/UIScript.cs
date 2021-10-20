@@ -48,6 +48,36 @@ public class UIScript : MonoBehaviour
     {
         SetProgressbar();
         InGameScore.text = "Score: " + gm.GetScore();
+
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            if (mainMenu.GetComponentInChildren<Canvas>().enabled && UnityEngine.EventSystems.EventSystem.current
+                .currentSelectedGameObject == null)
+            {
+                mainStartButton.Select();
+            }
+
+            if (deathScreen.GetComponentInChildren<Canvas>().enabled && UnityEngine.EventSystems.EventSystem.current
+                .currentSelectedGameObject == null)
+            {
+                deathRestartButton.Select();
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            if (mainMenu.GetComponentInChildren<Canvas>().enabled && UnityEngine.EventSystems.EventSystem.current
+                .currentSelectedGameObject == null)
+            {
+                mainCreditsButton.Select();
+            }
+            
+            if (deathScreen.GetComponentInChildren<Canvas>().enabled && UnityEngine.EventSystems.EventSystem.current
+                .currentSelectedGameObject == null)
+            {
+                deathMainButton.Select();
+            }
+        }
     }
 
     private void SetProgressbar()

@@ -119,11 +119,10 @@ public class GameManager : MonoBehaviour
     {
         if (canLoad == true)
         {
-            loseSound.Play();
             _health.RemoveOneHealth();
             health = _health.health;
             if (health <= 0) { GameOver(); }
-            else { ResetValues(); NextGame(); }
+            else { loseSound.Play(); ResetValues(); NextGame(); }
         }
     }
 
