@@ -58,6 +58,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         scenesLoading = new List<AsyncOperation>();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     #region Timing + Gameplay
